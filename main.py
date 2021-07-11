@@ -1,4 +1,5 @@
 import tkinter as tk
+from star import StarGrid
 
 # Size of square in grid
 GRID_SQUARE_SIZE = 40
@@ -71,13 +72,14 @@ class SolverGUI(tk.Tk):
 
         self.grid.bind("<Button-1>", self.paint_square)
 
-        num_stars_label = tk.Label(self.frame1, text="Number of stars per row/column/region:", padx=3, pady=3)
-        num_stars_label.pack()
+        # add back in when solver can actually do different numbers of stars
+        # num_stars_label = tk.Label(self.frame1, text="Number of stars per row/column/region:", padx=3, pady=3)
+        # num_stars_label.pack()
 
-        num_stars_entry = tk.Entry(self.frame1, width=2)
-        num_stars_entry.pack()
+        # num_stars_entry = tk.Entry(self.frame1, width=2)
+        # num_stars_entry.pack()
 
-        solve_button = tk.Button(self.frame1, text='Solve!',command=None)
+        solve_button = tk.Button(self.frame2, text='Solve!',command=self.solve)
         solve_button.pack() 
         
         self.frame2.tkraise()
@@ -101,6 +103,22 @@ class SolverGUI(tk.Tk):
                                         fill=COLORS[self.color])
 
         self.square_to_color[square_x][square_y] = self.color
+
+    def solve(self):
+        regions = [[] for _ in range(self.num_regions)]
+
+        for row in range(self.num_regions):
+            for col in range(self.num_regions):
+                color = self.square_to_color[row][col]
+                regions[color].append((row, col))
+
+        sg = StarGrid(regions)
+        sg.solve()
+        solution = sg.board
+        
+        
+
+
 
 solver = SolverGUI()
 solver.mainloop()
