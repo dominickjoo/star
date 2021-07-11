@@ -57,20 +57,20 @@ class SolverGUI(tk.Tk):
         color_palette.bind("<Button-1>", self.get_color)
 
 
-        grid = tk.Canvas(self.frame2,
+        self.grid = tk.Canvas(self.frame2,
                     height=GRID_SQUARE_SIZE*num_regions + 50,
                     width=GRID_SQUARE_SIZE*num_regions + 50)
-        grid.pack()
+        self.grid.pack()
 
         for row in range(num_regions):
             for col in range(num_regions):
-                grid.create_rectangle(GRID_SQUARE_SIZE*col + 25, 
+                self.grid.create_rectangle(GRID_SQUARE_SIZE*col + 25, 
                                         GRID_SQUARE_SIZE*row + 25,
                                         GRID_SQUARE_SIZE*(col+1) + 25,
                                         GRID_SQUARE_SIZE*(row+1) + 25,
                                         fill='')
 
-        grid.bind("<Button-1>", self.paint_square)
+        self.grid.bind("<Button-1>", self.paint_square)
 
         num_stars_label = tk.Label(self.frame1, text="Number of stars per row/column/region:", padx=3, pady=3)
         num_stars_label.pack()
@@ -84,10 +84,10 @@ class SolverGUI(tk.Tk):
         self.frame2.tkraise()
 
     def get_color(self, event):
-        if event.y < 15 or (event.x % 45) < 15:
+        if event.y < 15 or (event.x % PALETTE_SQUARE_SIZE + SPACE_SIZE) < 15:
             return
 
-        self.color = COLORS[event.x // 45]
+        self.color = COLORS[event.x // (PALETTE_SQUARE_SIZE + SPACE_SIZE)]
 
         print(event.x, event.y)
         print(self.color)
@@ -96,11 +96,14 @@ class SolverGUI(tk.Tk):
         if not ((25 < event.x < GRID_SQUARE_SIZE*self.num_regions + 25) and (25 < event.y < GRID_SQUARE_SIZE*self.num_regions + 25)):
             return
 
+        square_x = (event.x - 25) // GRID_SQUARE_SIZE 
+        square_y = (event.y - 25) // GRID_SQUARE_SIZE 
 
-
-
-
-        print(event.x, event.y)
+        self.grid.create_rectangle(GRID_SQUARE_SIZE*square_x + 25, 
+                                    GRID_SQUARE_SIZE*square_y + 25,
+                                    GRID_SQUARE_SIZE*(square_x+1) + 25,
+                                    GRID_SQUARE_SIZE*(square_y+1) + 25,
+                                        fill=self.color)
 
 solver = SolverGUI()
 solver.mainloop()
