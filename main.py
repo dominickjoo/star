@@ -1,4 +1,6 @@
 import tkinter as tk
+import numpy as np
+
 from star import StarGrid
 
 # Size of square in grid
@@ -115,8 +117,27 @@ class SolverGUI(tk.Tk):
         sg = StarGrid(regions)
         sg.solve()
         solution = sg.board
+
+        print(solution)
         
-        
+        stars = []
+        for row in range(self.num_regions):
+            for col in range(self.num_regions):
+                # 1 is the code for STAR
+                if solution[row][col] == 1:
+                    stars.append((row, col))
+
+        for star in stars:
+            star_x = star[0]
+            star_y = star[1]
+            # changed 25s to 30s and 20s to make circles smaller
+            self.grid.create_oval(GRID_SQUARE_SIZE*star_x + 30, 
+                                    GRID_SQUARE_SIZE*star_y + 30,
+                                    GRID_SQUARE_SIZE*(star_x+1) + 20,
+                                    GRID_SQUARE_SIZE*(star_y+1) + 20,
+                                        fill='white')
+
+
 
 
 
