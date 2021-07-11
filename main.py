@@ -34,8 +34,7 @@ class SolverGUI(tk.Tk):
             self.frame2.destroy()
 
         self.num_regions = num_regions
-
-        print(num_regions)
+        self.square_to_color = [[None]*num_regions for _ in range(num_regions)]
 
         self.frame2 = tk.Frame(self)
         self.frame2.pack()
@@ -86,11 +85,7 @@ class SolverGUI(tk.Tk):
     def get_color(self, event):
         if event.y < 15 or (event.x % PALETTE_SQUARE_SIZE + SPACE_SIZE) < 15:
             return
-
-        self.color = COLORS[event.x // (PALETTE_SQUARE_SIZE + SPACE_SIZE)]
-
-        print(event.x, event.y)
-        print(self.color)
+        self.color = event.x // (PALETTE_SQUARE_SIZE + SPACE_SIZE)
 
     def paint_square(self, event):
         if not ((25 < event.x < GRID_SQUARE_SIZE*self.num_regions + 25) and (25 < event.y < GRID_SQUARE_SIZE*self.num_regions + 25)):
@@ -103,7 +98,9 @@ class SolverGUI(tk.Tk):
                                     GRID_SQUARE_SIZE*square_y + 25,
                                     GRID_SQUARE_SIZE*(square_x+1) + 25,
                                     GRID_SQUARE_SIZE*(square_y+1) + 25,
-                                        fill=self.color)
+                                        fill=COLORS[self.color])
+
+        self.square_to_color[square_x][square_y] = self.color
 
 solver = SolverGUI()
 solver.mainloop()
