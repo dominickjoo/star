@@ -93,7 +93,7 @@ class SolverGUI(tk.Tk):
         print(self.color)
 
     def paint_square(self, event):
-        if not (25 < event.x < 425 and 25 < event.y < 425):
+        if not ((25 < event.x < GRID_SQUARE_SIZE*self.num_regions + 25) and (25 < event.y < GRID_SQUARE_SIZE*self.num_regions + 25)):
             return
 
 
