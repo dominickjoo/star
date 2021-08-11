@@ -4,10 +4,10 @@ Run `python main.py` in a directory containing `main.py` and `star.py`. Make sur
 
 ### Gallery ###
 
-![Generated grid](screenshots/generated_grid.png)
-![Filled grid](screenshots/filled_grid.png)
-![Solved grid](screenshots/solved_grid.png)
-![Sample](screenshots/sample.gif)
+<img src="screenshots/generated_grid.png" width="315" height="427"/>
+<img src="screenshots/filled_grid.png" width="315" height="427"/>
+<img src="screenshots/solved_grid.png" width="315" height="427"/>
+<img src="screenshots/sample.gif" width="315" height="427"/>
 
 Fun fact: the solver works on puzzles with non-contiguous regions!
 
