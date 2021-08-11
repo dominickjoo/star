@@ -2,7 +2,7 @@
 
 Run `python main.py` in a directory containing `main.py` and `star.py`. Make sure to color every cell before starting.
 
-# Gallery
+### Gallery ###
 
 ![Generated grid](screenshots/generated_grid.png)
 ![Filled grid](screenshots/filled_grid.png)
