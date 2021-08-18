@@ -12,3 +12,7 @@ Easy things to improve on:
 - Click and drag for coloring grid
 - Make maximum number of regions more than 10 (really just need to make the colors list bigger)
 - More error catching with bad user inputs
+
+Harder things to improve on:
+- Solve more efficiently (basically put in more constraints, but this is probably best done by using a library like Z3)
+- Solve things "like a human would" to improve (see [Andrew Stuart's sudoku solver](https://www.sudokuwiki.org/sudoku.htm) for an example of what I mean)
